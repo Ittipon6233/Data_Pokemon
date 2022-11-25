@@ -147,6 +147,16 @@ export default function DisplayAllPokemon({ pokemon }) {
                                     {a.ability.name}</Card>
                                 ))}
                             </Typography>
+                            <Typography>
+                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display:'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(0, 0, 0)'}}>Height {detail.height} / Weight {detail.weight}</Card>
+                            </Typography>
+                            <Typography>
+                                Stats: {detail.stats.map((s, i) => (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(0, 0, 0)' }}>
+                                    {s.stat.name} {s.base_stat}</Card>
+                                ))}
+                            </Typography>
+                            
                         </Card>
                     </Grid>
                 </Container>
