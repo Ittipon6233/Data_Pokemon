@@ -16,6 +16,7 @@ import { Navigate, Route, Router, Routes, useNavigate, useNavigation } from 'rea
 import { createContext } from 'react';
 import BackgroundName from "../img/loading2.gif";
 import BackgroundName1 from "../img/loading4.png";
+import BackgroundShiny from "../img/bg-shiny.png";
 
 
 export default function DisplayAllPokemon({ pokemon }) {
@@ -59,11 +60,11 @@ export default function DisplayAllPokemon({ pokemon }) {
                 />
                     <CardContent sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
                         <Typography>
-                            {val.order < 10 
-                            ? (<h3>#00{val.order}</h3>) 
-                            : val.order < 100 
-                            ? (<h3>#0{val.order}</h3> )
-                            : (<h3>#{val.order}</h3>)}
+                            {val.id < 10 
+                            ? (<h3>#00{val.id}</h3>) 
+                            : val.id < 100 
+                            ? (<h3>#0{val.id}</h3> )
+                            : (<h3>#{val.id}</h3>)}
                             <h3>{val.base_experience}</h3>
                         </Typography>
                         <Typography sx={{ margin: '5px 0' }}>
@@ -175,18 +176,18 @@ export default function DisplayAllPokemon({ pokemon }) {
             }}>
                 <Card sx={{ color: 'white', backgroundColor: 'black'}}>
                     <Typography gutterBottom variant="h5">
-                        {detail.order < 10 
-                        ? (<h1>#00{detail.order}</h1>) 
-                        : detail.order < 100 
-                        ? (<h1>#0{detail.order}</h1> )
-                        : (<h1>#{detail.order}</h1>)}
+                        {detail.id < 10 
+                        ? (<h1>#00{detail.id}</h1>) 
+                        : detail.id < 100 
+                        ? (<h1>#0{detail.id}</h1> )
+                        : (<h1>#{detail.id}</h1>)}
                           <h1>{detail.name}</h1> 
                     </Typography>
                 </Card>
                     
                 <Container sx={{ py: 5 }} >
                     <Grid>
-                        <Card >
+                        <Card>
                             <CardMedia 
                                 sx={{
                                     backgroundImage: `url(${Loading})`,
@@ -194,7 +195,7 @@ export default function DisplayAllPokemon({ pokemon }) {
                                 }}
                                 alt={detail.name}
                             >
-                                <img width="30%" src={detail.sprites.front_default} />
+                                <img width="30%" src={detail.sprites.other['official-artwork'].front_default} />
                             </CardMedia>
                             <Typography>
                                 <h3>Base Experience: {detail.base_experience}</h3>
@@ -274,6 +275,23 @@ export default function DisplayAllPokemon({ pokemon }) {
                                     {s.stat.name} {s.base_stat}</Card>
                                 ))}
                             </Typography>
+                            {detail.sprites.other.home.front_shiny
+                            ? (
+                                <Typography>
+                                        <Card sx={{ padding: '0px 5px', margin: '0px', color: 'white', backgroundColor: 'rgb(0, 0, 0)' }}>
+                                            <h2>Shiny</h2>
+                                        </Card>
+                                </Typography>
+                            ) : ('')}
+                                <CardMedia  
+                                    sx={{
+                                        backgroundImage: `url(${Background})`,
+                                        // 16:9
+                                    }}
+                                    alt={detail.name+" shiny"}
+                                >
+                                    <img width="30%" src={detail.sprites.other.home.front_shiny} />
+                                </CardMedia>
                             
                         </Card>
                     </Grid>
