@@ -6,10 +6,13 @@ import Card from '@mui/material/Card';
 import Loading from "../img/loading.gif";
 import Background from "../img/loading2.gif";
 import { Container, createTheme } from '@mui/system';
+import {AppContext} from "./DisplayAllPokemon";
+import { useContext } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-
-export default function DisplayPokemon({ info }) {
+export default function DisplayPokemon() {
     const [isLoading, setisLoading] = useState(false);
+
 
     useEffect(() => {
         setisLoading(true);
@@ -25,7 +28,6 @@ export default function DisplayPokemon({ info }) {
                 backgroundRepeat: 'repeat'
             }}>
                 <Container sx={{ py: 8 }} maxWidth="md">
-                    {info.name}
                 </Container>
             </Box>
         )
