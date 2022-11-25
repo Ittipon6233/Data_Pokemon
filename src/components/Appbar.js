@@ -24,7 +24,6 @@ import LogoPokemon from '../img/logo_pokemon.png';
 import LogoPokeBall from '../img/logo_pokeball.png';
 import Background from "../img/bg.jpg";
 import { Route, Router, Routes } from 'react-router-dom';
-import DisplayPokemon from './DisplayPokemon';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

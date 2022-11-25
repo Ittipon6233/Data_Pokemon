@@ -12,7 +12,6 @@ import { Container, createTheme } from '@mui/system';
 import "../css/style.css";
 import Loading from "../img/loading.gif";
 import Background from "../img/bg.jpg";
-import DisplayPokemon from "./DisplayPokemon";
 import { Navigate, Route, Router, Routes, useNavigate, useNavigation } from 'react-router-dom';
 import { createContext } from 'react';
 import BackgroundName from "../img/loading2.gif";
@@ -24,6 +23,120 @@ export default function DisplayAllPokemon({ pokemon }) {
     var [result, setResult] = useState([]);
     var [detail, setDetail] = useState("");
     let i = 0;
+
+    function handleShowResult(val,i){
+        return (
+            <Grid item key={i} xs={12} sm={6} md={4}>
+                <Card
+                    sx={{ height: '100%', display: 'flex', flexDirection: 'column', color: 'white' }}
+                >
+                <Box sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
+                        <Typography onClick={() => setDetail(val)}
+                                gutterBottom 
+                                variant="h5"       
+                                component="h2"
+                                sx={{
+                                    "&:hover": {
+                                        color: 'rgb(82, 56, 252, 0.7)'
+                                    },
+                                }}>
+                                    
+                                { <h3>{val.name}</h3> }
+                        </Typography>
+                </Box>
+                    <CardMedia onClick={() => setDetail(val)}
+                    component="img" 
+                    sx={{
+                        backgroundImage: `url(${BackgroundName})`,
+                        "&:hover": {
+                            backgroundImage: `url(${BackgroundName1})`,
+                        },
+                        // 16:9
+                        pt: '10%',
+                    }}
+                    image={val.sprites.front_default}
+                    alt={val.name}
+                />
+                    <CardContent sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
+                        <Typography>
+                            {val.order < 10 
+                            ? (<h3>#00{val.order}</h3>) 
+                            : val.order < 100 
+                            ? (<h3>#0{val.order}</h3> )
+                            : (<h3>#{val.order}</h3>)}
+                            <h3>{val.base_experience}</h3>
+                        </Typography>
+                        <Typography sx={{ margin: '5px 0' }}>
+                            Types: {val.types.map((t, i) => (
+                                t.type.name.toLowerCase() == 'normal' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 168, 120)' }}>{t.type.name}</Card>
+                                ) :
+                                    t.type.name.toLowerCase() == 'fire' ? (
+                                        <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(240, 128, 48)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'fighting' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(192, 48, 40)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'water' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 144, 240)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'flying' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 144, 240)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'grass' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(120, 200, 80)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'poison' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(160, 64, 160)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'electric' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(248, 208, 48)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'ground' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(224, 192, 104)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'psychic' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(201, 94, 126)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'rock' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 160, 56)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'ice' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(152, 216, 216)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'bug' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 184, 32)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'dragon' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 56, 248)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'ghost' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 152)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'dark' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 72)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'steel' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 184, 208)' }}>{t.type.name}</Card>
+                                ) :
+                                t.type.name.toLowerCase() == 'fairy' ? (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(238, 153, 172)' }}>{t.type.name}</Card>
+                                ) : (
+                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 160, 144)' }}>{t.type.name}</Card>
+                                )
+                            ))}
+                        </Typography>
+                        <Typography>
+                            Abilities: {val.abilities.map((a, i) => (
+                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(0, 0, 0)' }}>
+                                {a.ability.name}</Card>
+                            ))}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+        )
+    }
 
     useEffect(() => {
         setisLoading(true);
@@ -62,7 +175,12 @@ export default function DisplayAllPokemon({ pokemon }) {
             }}>
                 <Card sx={{ color: 'white', backgroundColor: 'black'}}>
                     <Typography gutterBottom variant="h5">
-                            { <h1>{detail.name}</h1> }
+                        {detail.order < 10 
+                        ? (<h1>#00{detail.order}</h1>) 
+                        : detail.order < 100 
+                        ? (<h1>#0{detail.order}</h1> )
+                        : (<h1>#{detail.order}</h1>)}
+                          <h1>{detail.name}</h1> 
                     </Typography>
                 </Card>
                     
@@ -186,220 +304,14 @@ export default function DisplayAllPokemon({ pokemon }) {
                                         || String(val.base_experience).includes(pokemon.toLowerCase())
                                         || flag
                                         ? (
-                                            <Grid item key={i} xs={12} sm={6} md={4}>
-                                            <Card
-                                                sx={{ height: '100%', display: 'flex', flexDirection: 'column', color: 'white' }}
-                                            >
-                                            <Box sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
-                                                    <Typography onClick={() => setDetail(val)}
-                                                            gutterBottom  
-                                                            variant="h5"       
-                                                            component="h2"
-                                                            sx={{
-                                                                "&:hover": {
-                                                                    color: 'rgb(82, 56, 252, 0.7)'
-                                                                },
-                                                            }}>
-                                                            { <h3>{val.name}</h3> }
-                                                    </Typography>
-                                            </Box>
-                                                <CardMedia onClick={() => setDetail(val)}
-                                                component="img" 
-                                                sx={{
-                                                    backgroundImage: `url(${BackgroundName})`,
-                                                    "&:hover": {
-                                                        backgroundImage: `url(${BackgroundName1})`,
-                                                    },
-                                                    // 16:9
-                                                    pt: '10%',
-                                                }}
-                                                image={val.sprites.front_default}
-                                                alt={val.name}
-                                            />
-                                                <CardContent sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
-                                                    
-                                                    <Typography>
-                                                        <h3>{val.base_experience}</h3>
-                                                    </Typography>
-                                                    <Typography sx={{ margin: '5px 0' }}>
-                                                        Types: {val.types.map((t, i) => (
-                                                            t.type.name.toLowerCase() == 'normal' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 168, 120)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                                t.type.name.toLowerCase() == 'fire' ? (
-                                                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(240, 128, 48)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'fighting' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(192, 48, 40)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'water' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 144, 240)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'flying' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 144, 240)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'grass' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(120, 200, 80)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'poison' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(160, 64, 160)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'electric' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(248, 208, 48)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ground' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(224, 192, 104)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'psychic' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(201, 94, 126)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'rock' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 160, 56)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ice' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(152, 216, 216)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'bug' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 184, 32)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'dragon' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 56, 248)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ghost' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 152)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'dark' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 72)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'steel' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 184, 208)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'fairy' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(238, 153, 172)' }}>{t.type.name}</Card>
-                                                            ) : (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 160, 144)' }}>{t.type.name}</Card>
-                                                            )
-                                                        ))}
-                                                    </Typography>
-                                                    <Typography>
-                                                        Abilities: {val.abilities.map((a, i) => (
-                                                            <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(0, 0, 0)' }}>
-                                                            {a.ability.name}</Card>
-                                                        ))}
-                                                    </Typography>
-                                                </CardContent>
-                                            </Card>
-                                        </Grid>
+                                            handleShowResult(val,i)
                                         ) : (i != result.length - 1 ? '' : 'Pokemon not found!')
                                 ))
 
                             )
                                 : (
                                     result.map((val, i) => (
-                                        <Grid item key={i} xs={12} sm={6} md={4}>
-                                            <Card
-                                                sx={{ height: '100%', display: 'flex', flexDirection: 'column', color: 'white' }}
-                                            >
-                                            <Box sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
-                                                    <Typography onClick={() => setDetail(val)}
-                                                            gutterBottom 
-                                                            variant="h5"       
-                                                            component="h2"
-                                                            sx={{
-                                                                "&:hover": {
-                                                                    color: 'rgb(82, 56, 252, 0.7)'
-                                                                },
-                                                            }}>
-                                                            { <h3>{val.name}</h3> }
-                                                    </Typography>
-                                            </Box>
-                                                <CardMedia onClick={() => setDetail(val)}
-                                                component="img" 
-                                                sx={{
-                                                    backgroundImage: `url(${BackgroundName})`,
-                                                    "&:hover": {
-                                                        backgroundImage: `url(${BackgroundName1})`,
-                                                    },
-                                                    // 16:9
-                                                    pt: '10%',
-                                                }}
-                                                image={val.sprites.front_default}
-                                                alt={val.name}
-                                            />
-                                                <CardContent sx={{ flexGrow: 1, backgroundColor: 'rgb(16, 14, 14, 0.8)' }}>
-                                                    
-                                                    <Typography>
-                                                        <h3>{val.base_experience}</h3>
-                                                    </Typography>
-                                                    <Typography sx={{ margin: '5px 0' }}>
-                                                        Types: {val.types.map((t, i) => (
-                                                            t.type.name.toLowerCase() == 'normal' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 168, 120)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                                t.type.name.toLowerCase() == 'fire' ? (
-                                                                    <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(240, 128, 48)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'fighting' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(192, 48, 40)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'water' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 144, 240)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'flying' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 144, 240)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'grass' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(120, 200, 80)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'poison' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(160, 64, 160)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'electric' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(248, 208, 48)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ground' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(224, 192, 104)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'psychic' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(201, 94, 126)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'rock' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 160, 56)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ice' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(152, 216, 216)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'bug' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(168, 184, 32)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'dragon' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 56, 248)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'ghost' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 152)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'dark' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(112, 88, 72)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'steel' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(184, 184, 208)' }}>{t.type.name}</Card>
-                                                            ) :
-                                                            t.type.name.toLowerCase() == 'fairy' ? (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(238, 153, 172)' }}>{t.type.name}</Card>
-                                                            ) : (
-                                                                <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(104, 160, 144)' }}>{t.type.name}</Card>
-                                                            )
-                                                        ))}
-                                                    </Typography>
-                                                    <Typography>
-                                                        Abilities: {val.abilities.map((a, i) => (
-                                                            <Card sx={{ padding: '0px 10px', margin: '0px 2px', display: 'inline-block', flexGrow: 1, color: 'white', backgroundColor: 'rgb(0, 0, 0)' }}>
-                                                            {a.ability.name}</Card>
-                                                        ))}
-                                                    </Typography>
-                                                </CardContent>
-                                            </Card>
-                                        </Grid>
+                                        handleShowResult(val,i)
                                     ))
                                 )
                             }
